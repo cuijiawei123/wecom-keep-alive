@@ -12,6 +12,11 @@ import { permissionManager } from './permission';
 import { IPC_CHANNELS } from '../shared/ipc-channels';
 import { INITIAL_RUNTIME_STATE, RuntimeState, AppConfig } from '../shared/types';
 
+// Windows: 禁用 GPU 加速以避免 GpuControl.CreateCommandBuffer 错误
+if (process.platform === 'win32') {
+  app.disableHardwareAcceleration();
+}
+
 // 运行时状态
 let runtimeState: RuntimeState = { ...INITIAL_RUNTIME_STATE };
 let mainWindow: BrowserWindow | null = null;
