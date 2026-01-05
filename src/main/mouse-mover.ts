@@ -62,7 +62,7 @@ export class MouseMover {
     this.isRunning = true;
     this.scheduleNextMove();
     this.notifyStateChange();
-    safeLog('[保活] 🟢 服务已启动');
+    safeLog('[KeepAlive] Service started');
   }
 
   /**
@@ -78,7 +78,7 @@ export class MouseMover {
     }
     this.nextMoveAt = 0;
     this.notifyStateChange();
-    safeLog('[保活] 🔴 服务已停止');
+    safeLog('[KeepAlive] Service stopped');
   }
 
   /**
@@ -135,11 +135,11 @@ export class MouseMover {
     try {
       // 获取当前鼠标位置（使用平台抽象层）
       const currentPos = await this.mouseController.getPosition();
-      safeLog(`[保活] 当前鼠标位置: (${currentPos.x}, ${currentPos.y})`);
+      safeLog(`[KeepAlive] Mouse position: (${currentPos.x}, ${currentPos.y})`);
 
       // 随机选择移动方向 (上下左右)
       const direction = Math.floor(Math.random() * 4);
-      const directionName = ['上', '下', '左', '右'][direction];
+      const directionName = ['up', 'down', 'left', 'right'][direction];
       const offset = 1; // 移动 1 像素
 
       let newX = currentPos.x;
@@ -169,10 +169,10 @@ export class MouseMover {
 
       this.lastMoveAt = Date.now();
       safeLog(
-        `[保活] ✅ 鼠标微移动完成 - 方向: ${directionName}, 时间: ${new Date().toLocaleTimeString()}`
+        `[KeepAlive] Mouse moved - direction: ${directionName}, time: ${new Date().toLocaleTimeString()}`
       );
     } catch (error) {
-      safeError('[保活] ❌ 鼠标移动失败:', error);
+      safeError('[KeepAlive] Mouse move failed:', error);
     }
 
     // 调度下一次移动

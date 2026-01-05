@@ -36,7 +36,7 @@ Write-Output "$($pos.X),$($pos.Y)"
       const y = parts[1] ?? DEFAULT_MOUSE_POSITION.y;
       return { x, y };
     } catch (error) {
-      console.error('[Windows] 获取鼠标位置失败:', error);
+      console.error('[Windows] Failed to get mouse position:', error);
       return { ...DEFAULT_MOUSE_POSITION };
     }
   }
@@ -57,7 +57,7 @@ Add-Type -AssemblyName System.Windows.Forms
         windowsHide: true,
       });
     } catch (error) {
-      console.error('[Windows] 设置鼠标位置失败:', error);
+      console.error('[Windows] Failed to set mouse position:', error);
       // Windows 上没有备用方案，但鼠标模拟通常不会失败
     }
   }

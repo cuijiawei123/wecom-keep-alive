@@ -34,7 +34,7 @@ print(f"{int(loc.x)},{int(screen.size.height - loc.y)}")
       const y = parts[1] ?? DEFAULT_MOUSE_POSITION.y;
       return { x, y };
     } catch (error) {
-      console.error('[macOS] 获取鼠标位置失败:', error);
+      console.error('[macOS] Failed to get mouse position:', error);
       return { ...DEFAULT_MOUSE_POSITION };
     }
   }
@@ -53,7 +53,7 @@ Quartz.CGEventPost(Quartz.kCGHIDEventTap, event)
     try {
       await execAsync(`python3 -c '${pythonScript}'`);
     } catch (error) {
-      console.error('[macOS] Python 鼠标移动失败:', error);
+      console.error('[macOS] Python mouse move failed:', error);
       // 备用方案：使用 AppleScript 模拟 Shift 键按下释放（无副作用）
       await this.simulateKeyPress();
     }
@@ -73,7 +73,7 @@ end tell
     try {
       await execFileAsync('osascript', ['-e', script]);
     } catch (error) {
-      console.error('[macOS] AppleScript 按键模拟失败:', error);
+      console.error('[macOS] AppleScript key simulation failed:', error);
     }
   }
 }
