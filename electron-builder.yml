@@ -1,0 +1,67 @@
+# electron-builder 配置文件
+# 文档: https://www.electron.build/configuration/configuration
+
+appId: com.wecom.keepalive
+productName: WeComKeepAlive
+copyright: Copyright © 2026
+
+# macOS 配置
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  icon: resources/icons/app-icon.icns
+  category: public.app-category.utilities
+  darkModeSupport: true
+  extendInfo:
+    # 隐藏 Dock 图标，仅显示托盘
+    LSUIElement: true
+
+# DMG 配置
+dmg:
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+  window:
+    width: 540
+    height: 380
+
+# Windows 配置
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  icon: resources/icons/tray-iconTemplate.png
+
+# NSIS 安装包配置
+nsis:
+  oneClick: true
+  perMachine: false
+  allowToChangeInstallationDirectory: false
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: WeComKeepAlive
+
+# 文件配置
+files:
+  - dist/**/*
+  - resources/**/*
+
+# 输出目录
+directories:
+  output: release
+  buildResources: resources
+
+# 发布配置（暂不启用）
+# publish:
+#   provider: github

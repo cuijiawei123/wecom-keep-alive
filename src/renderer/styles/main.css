@@ -1,0 +1,301 @@
+/**
+ * 紧凑型仪表盘样式 (Non-Scrolling)
+ * Premium macOS Glassmorphism
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --color-primary: #007AFF;
+  --color-primary-glow: rgba(0, 122, 255, 0.4);
+  --color-success: #34C759;
+  --color-success-glow: rgba(52, 199, 89, 0.4);
+  --color-text-main: #1D1D1F;
+  --color-text-dim: #86868B;
+  --color-bg-base: #F5F5F7;
+  --color-card-bg: rgba(255, 255, 255, 0.7);
+  --color-border: rgba(0, 0, 0, 0.05);
+  --glass-stroke: rgba(255, 255, 255, 0.5);
+  
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  
+  --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-base: #000000;
+    --color-card-bg: rgba(28, 28, 30, 0.6);
+    --color-text-main: #FFFFFF;
+    --color-text-dim: #A1A1A6;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --glass-stroke: rgba(255, 255, 255, 0.1);
+  }
+}
+
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--color-text-main);
+  background: transparent;
+}
+
+#app {
+  height: 100%;
+  background: var(--color-bg-base);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 标题栏 */
+.titlebar {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: drag;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.titlebar .title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-text-dim);
+  opacity: 0.8;
+}
+
+/* 主容器 */
+.content.compact-dashboard {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+/* 权限覆盖层 */
+.permission-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.warning-card {
+  background: var(--color-bg-base);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 控制面板卡片 */
+.control-dashboard {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-stroke);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-text-dim);
+  border-radius: 50%;
+  transition: .3s;
+}
+
+.status-dot.active {
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success-glow);
+  animation: dot-pulse 2s infinite;
+}
+
+@keyframes dot-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.status-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 计时器显示区 */
+.timer-display-area {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.02);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .timer-display-area { background: rgba(255,255,255,0.03); }
+}
+
+.big-timer {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, var(--color-text-main) 30%, var(--color-text-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.timer-sub {
+  font-size: 12px;
+  color: var(--color-text-dim);
+  text-align: center;
+  margin-top: -4px;
+}
+
+.highlight {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.idle-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.6;
+}
+
+.idle-icon { font-size: 32px; }
+.idle-text { font-size: 12px; font-weight: 500; }
+
+/* 时长选择器 */
+.duration-section-compact {
+  padding: 0 4px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.duration-chips {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+.chip {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  padding: 8px 0;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: var(--transition-spring);
+}
+
+.chip:hover {
+  background: rgba(0, 122, 255, 0.1);
+  border-color: var(--color-primary);
+}
+
+.chip.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px var(--color-primary-glow);
+}
+
+/* 页脚 */
+.footer-compact {
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+#version {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-dim);
+  opacity: 0.5;
+}
+
+/* Toggle 样式 */
+.toggle {
+  position: relative;
+  width: 48px; height: 28px;
+}
+
+.toggle input { opacity: 0; width: 0; height: 0; }
+
+.toggle-slider {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--color-border);
+  border-radius: 28px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px; width: 22px;
+  left: 3px; bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: .3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.toggle input:checked + .toggle-slider { background: var(--color-success); }
+.toggle input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+/* 通用 */
+.hidden { display: none !important; }
+.btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 8px; }
+.btn-primary { background: var(--color-primary); color: white; border: none; cursor: pointer; }

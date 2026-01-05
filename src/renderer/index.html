@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com">
+  <title>WeComKeepAlive</title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 标题栏 -->
+    <div class="titlebar">
+      <span class="title">WECOM KEEP ALIVE</span>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="content compact-dashboard">
+      <!-- 权限提示 (仅在没权限时浮现，不占固定空间) -->
+      <div id="permission-warning" class="permission-overlay hidden">
+        <div class="card warning-card">
+          <div class="warning-icon">⚠️</div>
+          <p>需要辅助功能权限</p>
+          <button id="btn-open-settings" class="btn btn-primary btn-sm">去授权</button>
+        </div>
+      </div>
+
+      <!-- 核心控制区 -->
+      <div class="card control-dashboard">
+        <div class="status-header">
+          <div class="status-info">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="status-text" class="status-label">准备就绪</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="toggle-enabled">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="timer-display-area">
+          <div id="time-section" class="timer-container hidden">
+            <div class="big-timer" id="remaining-time">00:00:00</div>
+            <div class="timer-sub">
+              <span>下次活跃：</span>
+              <span id="countdown-value" class="highlight">--</span>
+              <span>s</span>
+            </div>
+          </div>
+          <div id="idle-display" class="idle-placeholder">
+            <div class="idle-icon">⚡</div>
+            <div class="idle-text">开启功能保持电脑常亮</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 时长选择 (底部紧凑排列) -->
+      <div class="duration-section-compact">
+        <div class="section-label">保活时长限制</div>
+        <div class="duration-chips" id="duration-selector">
+          <button class="chip" data-value="30">30m</button>
+          <button class="chip" data-value="60">1h</button>
+          <button class="chip" data-value="120">2h</button>
+          <button class="chip" data-value="240">4h</button>
+          <button class="chip" data-value="480">8h</button>
+          <button class="chip" data-value="0">∞</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 极简页脚 -->
+    <footer class="footer-compact">
+      <span id="version">v1.0.0</span>
+    </footer>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
