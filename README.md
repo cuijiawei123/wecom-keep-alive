@@ -1,7 +1,7 @@
 # WeComKeepAlive
 
 <p align="center">
-  <img src="resources/icons/tray-iconTemplate@2x.png" alt="WeComKeepAlive Logo" width="64" height="64">
+  <img src="resources/icons/app-icon.png" alt="WeComKeepAlive Logo" width="128" height="128">
 </p>
 
 <p align="center">
